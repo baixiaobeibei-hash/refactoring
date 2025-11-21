@@ -27,7 +27,7 @@ public class StatementPrinter {
         StringBuilder result = new StringBuilder("Statement for " + invoice.getCustomer() + System.lineSeparator());
         NumberFormat from = NumberFormat.getCurrencyInstance(Locale.US);
 
-        // 循环1：仅处理字符串拼接
+        //
         for (Performance performance : invoice.getPerformances()) {
             Play play = plays.get(performance.playID);
             result.append(String.format("  %s: %s (%s seats)%n",
@@ -36,9 +36,9 @@ public class StatementPrinter {
                     performance.audience));
         }
 
-        // 循环2：总金额通过方法获取，无需显式变量
+        //
         result.append(String.format("Amount owed is %s%n", from.format(getTotalAmount() / PERCENT_FACTOR)));
-        // 循环3：总积分通过方法获取，无需显式变量
+        //
         result.append(String.format("You earned %s credits%n", getTotalVolumeCredits()));
 
         return result.toString();
