@@ -5,8 +5,8 @@ package theater;
  */
 public class Performance {
 
-    public String playID;
-    public int audience;
+    public final String playID;
+    public final int audience;
 
     public Performance(String playID, int audience) {
         this.playID = playID;

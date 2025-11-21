@@ -2,8 +2,8 @@ package theater;
 
 public class Play {
 
-    public String name;
-    public String type;
+    public final String name;
+    public final String type;
 
     public Play(String name, String type) {
         this.name = name;
