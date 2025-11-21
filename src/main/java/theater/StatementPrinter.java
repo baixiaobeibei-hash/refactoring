@@ -28,7 +28,7 @@ public class StatementPrinter {
         int volumeCredits = 0;
         StringBuilder result = new StringBuilder("Statement for " + invoice.getCustomer() + System.lineSeparator());
 
-        NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
+        NumberFormat from = NumberFormat.getCurrencyInstance(Locale.US);
 
         for (Performance p : invoice.getPerformances()) {
             Play play = plays.get(p.playID);
@@ -37,12 +37,16 @@ public class StatementPrinter {
             volumeCredits += getVolumeCredits(p, play);
 
             // print line for this order
-            result.append(String.format("  %s: %s (%s seats)%n", play.name, frmt.format(getAmount(p, play) / PERCENT_FACTOR), p.audience));
+            result.append(String.format("  %s: %s (%s seats)%n", play.name, getFormat(p, from, play), p.audience));
             totalAmount += getAmount(p, play);
         }
-        result.append(String.format("Amount owed is %s%n", frmt.format(totalAmount / PERCENT_FACTOR)));
+        result.append(String.format("Amount owed is %s%n", from.format(totalAmount / PERCENT_FACTOR)));
         result.append(String.format("You earned %s credits%n", volumeCredits));
         return result.toString();
+    }
+
+    private String getFormat(Performance p, NumberFormat from, Play play) {
+        return from.format(getAmount(p, play) / PERCENT_FACTOR);
     }
 
     private static int getVolumeCredits(Performance p, Play play) {
