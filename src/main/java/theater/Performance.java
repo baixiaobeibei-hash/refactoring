@@ -20,6 +20,4 @@ public class Performance {
     public int getAudience() {
         return audience;
     }
-
-
 }

@@ -1,11 +1,13 @@
 package theater;
+
 /**
  * Represents a theatrical play with a name and type (e.g., tragedy, comedy).
  */
+
 public class Play {
 
-    public final String name;
-    public final String type;
+    private final String name;
+    private final String type;
 
     public Play(String name, String type) {
         this.name = name;
