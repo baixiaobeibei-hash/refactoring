@@ -6,6 +6,7 @@ import java.util.Map;
 
 import static theater.Constants.*;
 
+
 /**
  * This class generates a statement for a given invoice of performances.
  */
@@ -24,21 +25,21 @@ public class StatementPrinter {
      * @throws RuntimeException if one of the play types is not known
      */
     public String statement() {
-        StringBuilder result = new StringBuilder("Statement for " + invoice.getCustomer() + System.lineSeparator());
-        NumberFormat from = NumberFormat.getCurrencyInstance(Locale.US);
+        final StringBuilder result = new StringBuilder("Statement for " + invoice.getCustomer() + System.lineSeparator());
+        final NumberFormat from = NumberFormat.getCurrencyInstance(Locale.US);
 
-        //1
+        // add
         for (Performance performance : invoice.getPerformances()) {
-            Play play = plays.get(performance.playID);
+            final Play play = plays.get(performance.playID);
             result.append(String.format("  %s: %s (%s seats)%n",
                     play.name,
-                    from.format(getAmount(performance, play) / PERCENT_FACTOR),
+                    from.format(getAmount(performance, play) / Constants.PERCENT_FACTOR),
                     performance.audience));
         }
 
-        //2
-        result.append(String.format("Amount owed is %s%n", from.format(getTotalAmount() / PERCENT_FACTOR)));
-        //3
+        // print
+        result.append(String.format("Amount owed is %s%n", from.format(getTotalAmount() / Constants.PERCENT_FACTOR)));
+        // add
         result.append(String.format("You earned %s credits%n", getTotalVolumeCredits()));
 
         return result.toString();
@@ -47,7 +48,7 @@ public class StatementPrinter {
     private int getTotalVolumeCredits() {
         int result = 0;
         for (Performance performance : invoice.getPerformances()) {
-            Play play = plays.get(performance.playID);
+            final Play play = plays.get(performance.playID);
             result += getVolumeCredits(performance, play);
         }
         return result;
@@ -56,7 +57,7 @@ public class StatementPrinter {
     private int getTotalAmount() {
         int result = 0;
         for (Performance performance : invoice.getPerformances()) {
-            Play play = plays.get(performance.playID);
+            final Play play = plays.get(performance.playID);
             result += getAmount(performance, play);
         }
         return result;
@@ -77,7 +78,8 @@ public class StatementPrinter {
             case "tragedy":
                 result = TRAGEDY_BASE_AMOUNT;
                 if (performance.audience > TRAGEDY_AUDIENCE_THRESHOLD) {
-                    result += TRAGEDY_OVER_BASE_CAPACITY_PER_PERSON * (performance.audience - TRAGEDY_AUDIENCE_THRESHOLD);
+                    result += TRAGEDY_OVER_BASE_CAPACITY_PER_PERSON *
+                            (performance.audience - TRAGEDY_AUDIENCE_THRESHOLD);
                 }
                 break;
             case "comedy":
