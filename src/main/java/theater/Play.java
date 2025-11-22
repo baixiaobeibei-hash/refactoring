@@ -14,7 +14,6 @@ public class Play {
         this.type = type;
     }
 
-
     public String getName() {
         return name;
     }
