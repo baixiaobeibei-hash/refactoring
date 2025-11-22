@@ -11,6 +11,12 @@ public class StatementPrinter {
     private final Invoice invoice;
     private final Map<String, Play> plays;
 
+    /**
+     * Constructs a StatementPrinter with the specified invoice and plays.
+     *
+     * @param invoice the invoice to generate a statement for
+     * @param plays   the map of play IDs to Play objects
+     */
     public StatementPrinter(Invoice invoice, Map<String, Play> plays) {
         this.invoice = invoice;
         this.plays = plays;
