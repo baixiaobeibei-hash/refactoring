@@ -22,6 +22,12 @@ public class StatementPrinter {
         this.plays = plays;
     }
 
+    /**
+     * Returns a formatted statement of the invoice associated with this printer.
+     *
+     * @return the formatted statement string
+     * @throws RuntimeException if the play type is unknown
+     */
     public String statement() {
         final StringBuilder result = new StringBuilder(
                 "Statement for " + invoice.getCustomer() + System.lineSeparator()
